@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎁</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <title>Com amor e carinho</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #d3a4f7, #fbc2eb);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+    }
+
+    .gift-box {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      background-color: #9b59b6;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    .gift-lid {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 200px;
+      height: 60px;
+      background-color: #8e44ad;
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+      z-index: 2;
+      transform-origin: top center;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .ribbon-vertical,
+    .ribbon-horizontal {
+      position: absolute;
+      background-color: #ffffffcc;
+      z-index: 1;
+      transition: opacity 0.4s ease;
+    }
+
+    .ribbon-vertical {
+      width: 20px;
+      height: 100%;
+      left: 90px;
+      top: 0;
+    }
+
+    .ribbon-horizontal {
+      height: 20px;
+      width: 100%;
+      top: 90px;
+      left: 0;
+    }
+
+    .message {
+      font-family: 'Pacifico', cursive;
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      color: white;
+      font-size: 1.2rem;
+      opacity: 0;
+      transition: opacity 0.4s ease-in-out;
+      z-index: 0;
+    }
+
+    .opened .gift-lid {
+      transform: rotateX(120deg);
+    }
+
+    .opened .message {
+      opacity: 1;
+    }
+
+    .opened .ribbon-vertical,
+    .opened .ribbon-horizontal {
+      opacity: 0;
+    }
+
+    .confetti {
+      position: absolute;
+      width: 8px;
+      height: 12px;
+      background-color: red;
+      border-radius: 2px;
+      opacity: 0.8;
+      animation: fall 2s ease-out forwards;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(300px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="gift-box" id="giftBox">
+    <div class="gift-lid"></div>
+    <div class="ribbon-vertical"></div>
+    <div class="ribbon-horizontal"></div>
+    <div class="message">Você é incrível!</div>
+  </div>
+
+  <script>
+    const box = document.getElementById('giftBox');
+
+    box.addEventListener('mouseenter', () => {
+      if (!box.classList.contains('opened')) {
+        box.classList.add('opened');
+        launchConfetti();
+      }
+    });
+
+    box.addEventListener('mouseleave', () => {
+      box.classList.remove('opened');
+      // remove confetes visuais
+      const confettiElements = box.querySelectorAll('.confetti');
+      confettiElements.forEach(c => c.remove());
+    });
+
+    function launchConfetti() {
+      for (let i = 0; i < 50; i++) {
+        const confetti = document.createElement('div');
+        confetti.classList.add('confetti');
+        confetti.style.backgroundColor = getRandomColor();
+        confetti.style.left = `${Math.random() * 200}px`;
+        confetti.style.top = '60px';
+        confetti.style.animationDelay = `${Math.random()}s`;
+        box.appendChild(confetti);
+
+        // Remover após animação
+        setTimeout(() => confetti.remove(), 2000);
+      }
+    }
+
+    function getRandomColor() {
+      const colors = ['#f1c40f', '#e74c3c', '#1abc9c', '#9b59b6', '#ec87bf'];
+      return colors[Math.floor(Math.random() * colors.length)];
+    }
+  </script>
+</body>
+</html>
