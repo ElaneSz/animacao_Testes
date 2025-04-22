@@ -1,6 +1,6 @@
 # Caixinha de Surpresa Animada
 
-Uma simples e encantadora caixinha animada feita com HTML, CSS e JavaScript. Ao passar o cursor sobre a caixinha, ela se abre revelando uma mensagem especial: **"Você é incrível 💜"**.
+Uma simples caixinha animada feita com HTML, CSS e JavaScript. Ao passar o cursor sobre a caixinha, ela se abre revelando uma mensagem especial: **"Você é incrível 💜"**.
 
 ## Tecnologias Utilizadas
 
